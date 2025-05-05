@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "46425977943",
+    "project_id": "leafi-39f5f",
+    "storage_bucket": "leafi-39f5f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46425977943:android:824462842801c9448d9f12",
+        "android_client_info": {
+          "package_name": "com.nursematurhan.leafi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh_UK69j644UuppUWRYSgtztmD6vjKVMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
