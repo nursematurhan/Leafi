@@ -16,7 +16,7 @@ fun BottomNavigationBar(navController: NavController, isLoggedIn: Boolean) {
     Log.d("LeafiNav", "Current route: $currentRoute")
 
     NavigationBar(
-        containerColor = Color(0xFFEFEEEA) // Açık arka plan
+        containerColor = Color(0xFFEFEEEA)
     ) {
         items.forEach { item ->
             NavigationBarItem(

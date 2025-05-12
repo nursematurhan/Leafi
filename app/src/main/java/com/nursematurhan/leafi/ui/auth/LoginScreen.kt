@@ -92,7 +92,6 @@ fun LoginScreen(
         }
     }
 
-    // Giriş başarılıysa yönlendir
     LaunchedEffect(uiState.isSuccess) {
         if (uiState.isSuccess) {
             navController.navigate("plants") {

@@ -1,4 +1,4 @@
-package com.nursematurhan.leafi.ui.main
+package com.nursematurhan.leafi.ui.myplants
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
