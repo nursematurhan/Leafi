@@ -1,4 +1,4 @@
-package com.nursematurhan.leafi.ui.myplants
+package com.nursematurhan.leafi.myplants
 
 import android.net.Uri
 import androidx.compose.foundation.Image

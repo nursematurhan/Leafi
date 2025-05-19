@@ -1,4 +1,4 @@
-package com.nursematurhan.leafi.ui.auth
+package com.nursematurhan.leafi.auth
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

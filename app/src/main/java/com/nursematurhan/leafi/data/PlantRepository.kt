@@ -1,4 +1,4 @@
-package com.nursematurhan.leafi.ui.data
+package com.nursematurhan.leafi.data
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase

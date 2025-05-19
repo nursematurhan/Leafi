@@ -1,4 +1,4 @@
-package com.nursematurhan.leafi.ui.auth
+package com.nursematurhan.leafi.auth
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*

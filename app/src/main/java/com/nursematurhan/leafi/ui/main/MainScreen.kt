@@ -5,8 +5,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.nursematurhan.leafi.ui.auth.AuthState
-import com.nursematurhan.leafi.ui.auth.AuthViewModel
+import com.nursematurhan.leafi.auth.AuthState
+import com.nursematurhan.leafi.auth.AuthViewModel
 import com.nursematurhan.leafi.ui.navigation.AppNavGraph
 import androidx.compose.foundation.layout.padding
 import com.nursematurhan.leafi.ui.navigation.BottomNavigationBar

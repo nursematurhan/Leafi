@@ -9,7 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.nursematurhan.leafi.ui.auth.AuthViewModel
+import com.nursematurhan.leafi.auth.AuthViewModel
 import com.nursematurhan.leafi.ui.main.MainScreen
 import com.nursematurhan.leafi.ui.splash.SplashScreen
 import com.nursematurhan.leafi.ui.theme.LeafiTheme

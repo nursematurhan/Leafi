@@ -9,17 +9,18 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.gson.Gson
-import com.nursematurhan.leafi.ui.auth.*
-import com.nursematurhan.leafi.ui.home.HomeScreen
-import com.nursematurhan.leafi.ui.myplants.MyPlant
-import com.nursematurhan.leafi.ui.myplants.MyPlantDetailScreen
-import com.nursematurhan.leafi.ui.myplants.MyPlantsScreen
-import com.nursematurhan.leafi.ui.myplants.MyPlantsViewModel
-import com.nursematurhan.leafi.ui.myplants.*
-import com.nursematurhan.leafi.ui.plants.AddFromListScreen
-import com.nursematurhan.leafi.ui.plants.PlantListScreen
-import com.nursematurhan.leafi.ui.plants.PlantListViewModel
-import com.nursematurhan.leafi.ui.profile.ProfileScreen
+import com.nursematurhan.leafi.auth.AuthViewModel
+import com.nursematurhan.leafi.auth.LoginScreen
+import com.nursematurhan.leafi.auth.RegisterScreen
+import com.nursematurhan.leafi.home.HomeScreen
+import com.nursematurhan.leafi.myplants.MyPlant
+import com.nursematurhan.leafi.myplants.MyPlantDetailScreen
+import com.nursematurhan.leafi.myplants.MyPlantsScreen
+import com.nursematurhan.leafi.myplants.MyPlantsViewModel
+import com.nursematurhan.leafi.plants.AddFromListScreen
+import com.nursematurhan.leafi.plants.PlantListScreen
+import com.nursematurhan.leafi.plants.PlantListViewModel
+import com.nursematurhan.leafi.profile.ProfileScreen
 
 @Composable
 fun AppNavGraph(

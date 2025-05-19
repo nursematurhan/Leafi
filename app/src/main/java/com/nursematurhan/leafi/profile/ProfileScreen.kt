@@ -1,4 +1,4 @@
-package com.nursematurhan.leafi.ui.profile
+package com.nursematurhan.leafi.profile
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
@@ -16,7 +16,7 @@ import com.google.firebase.auth.userProfileChangeRequest
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.nursematurhan.leafi.ui.auth.AuthViewModel
+import com.nursematurhan.leafi.auth.AuthViewModel
 
 @Composable
 fun ProfileScreen(authViewModel: AuthViewModel) {

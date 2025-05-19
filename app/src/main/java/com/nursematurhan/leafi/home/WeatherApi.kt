@@ -1,7 +1,7 @@
 // WeatherApi.kt
 package com.nursematurhan.leafi.data.api
 
-import com.nursematurhan.leafi.ui.home.WeatherResponse
+import com.nursematurhan.leafi.home.WeatherResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

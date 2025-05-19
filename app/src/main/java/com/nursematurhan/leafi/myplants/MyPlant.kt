@@ -1,4 +1,4 @@
-package com.nursematurhan.leafi.ui.myplants
+package com.nursematurhan.leafi.myplants
 
 data class MyPlant(
     val plantId: String = "",

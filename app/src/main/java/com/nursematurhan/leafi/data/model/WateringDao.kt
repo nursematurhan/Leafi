@@ -1,7 +1,7 @@
 package com.nursematurhan.leafi.data
 
 import androidx.room.*
-import com.nursematurhan.leafi.ui.data.model.WateringHistory
+import com.nursematurhan.leafi.data.model.WateringHistory
 import kotlinx.coroutines.flow.Flow
 
 @Dao

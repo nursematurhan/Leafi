@@ -1,4 +1,4 @@
-package com.nursematurhan.leafi.ui.home
+package com.nursematurhan.leafi.home
 
 import WeatherViewModel
 import android.app.Activity

@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.State
 import com.nursematurhan.leafi.data.api.RetrofitInstance
 import com.nursematurhan.leafi.data.api.WeatherApi
-import com.nursematurhan.leafi.ui.home.WeatherResponse
+import com.nursematurhan.leafi.home.WeatherResponse
 
 class WeatherViewModel : ViewModel() {
     private val _weather = mutableStateOf<WeatherResponse?>(null)

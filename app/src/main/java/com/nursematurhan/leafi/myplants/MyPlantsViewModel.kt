@@ -1,4 +1,4 @@
-package com.nursematurhan.leafi.ui.myplants
+package com.nursematurhan.leafi.myplants
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
