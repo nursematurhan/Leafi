@@ -28,6 +28,10 @@ fun MyPlantsScreen(
 ) {
     val myPlants by viewModel.myPlants.collectAsState()
 
+    LaunchedEffect(Unit) {
+        viewModel.fetchMyPlants()
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -99,9 +103,6 @@ fun MyPlantCard(
                     },
                     color = if (remainingDays < 0) Color.Red else Color.Black
                 )
-            }
-            Button(onClick = onWatered) {
-                Text("Watered")
             }
         }
     }

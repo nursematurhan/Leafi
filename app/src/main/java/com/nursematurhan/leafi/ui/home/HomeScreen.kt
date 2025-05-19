@@ -1,6 +1,8 @@
 package com.nursematurhan.leafi.ui.home
 
 import WeatherViewModel
+import android.app.Activity
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,21 +13,40 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-
+import com.nursematurhan.leafi.util.getLastKnownLocation
+import com.nursematurhan.leafi.util.hasLocationPermission
+import com.nursematurhan.leafi.util.requestLocationPermission
 
 @Composable
 fun HomeScreen(navController: NavController) {
     val weatherViewModel: WeatherViewModel = viewModel()
     val weather = weatherViewModel.weather.value
+    val context = LocalContext.current
+    val activity = context as? Activity
+    var locationFetched by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        weatherViewModel.loadWeather("Istanbul", "63d33eafa64a5619dcafe8b998360639")
+        if (hasLocationPermission(context)) {
+            getLastKnownLocation(context) { lat, lon ->
+                weatherViewModel.loadWeatherByCoords(lat, lon, "63d33eafa64a5619dcafe8b998360639")
+                locationFetched = true
+            }
+        } else {
+            activity?.let {
+                requestLocationPermission(it)
+            }
+        }
+
+        if (!locationFetched) {
+            weatherViewModel.loadWeather("Istanbul", "63d33eafa64a5619dcafe8b998360639")
+        }
     }
 
     Column(
@@ -53,7 +74,6 @@ fun HomeScreen(navController: NavController) {
             )
         } ?: Text("Loading weather data...")
 
-
         DidYouKnowCard()
 
         HowItWorksSection()
@@ -65,7 +85,6 @@ fun HomeScreen(navController: NavController) {
         ) {
             Text("Start Now", color = Color.White)
         }
-
     }
 }
 
@@ -152,7 +171,6 @@ fun HowItWorksSection() {
         "📋 Track and manage your plants with reminders.",
         "🔔 Get notified when it’s time to water!"
     )
-
 
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         steps.forEachIndexed { index, step ->

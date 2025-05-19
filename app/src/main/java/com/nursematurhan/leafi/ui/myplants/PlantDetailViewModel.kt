@@ -3,8 +3,8 @@ package com.nursematurhan.leafi.ui.myplants
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.nursematurhan.leafi.data.LeafiDatabase
-import com.nursematurhan.leafi.data.model.WateringHistory
+import com.nursematurhan.leafi.ui.data.LeafiDatabase
+import com.nursematurhan.leafi.ui.data.model.WateringHistory
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

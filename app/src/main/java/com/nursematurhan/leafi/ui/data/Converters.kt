@@ -1,4 +1,4 @@
-package com.nursematurhan.leafi.data
+package com.nursematurhan.leafi.ui.data
 
 import androidx.room.TypeConverter
 import java.util.*

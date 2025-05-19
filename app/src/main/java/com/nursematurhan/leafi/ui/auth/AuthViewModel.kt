@@ -1,9 +1,11 @@
 package com.nursematurhan.leafi.ui.auth
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.userProfileChangeRequest
+import com.nursematurhan.leafi.util.cancelWaterReminder
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -44,8 +46,9 @@ class AuthViewModel : ViewModel() {
             }
     }
 
-    fun logout() {
+    fun logout(context: Context) {
         auth.signOut()
+        cancelWaterReminder(context)
         _authState.value = AuthState.Idle
     }
 }

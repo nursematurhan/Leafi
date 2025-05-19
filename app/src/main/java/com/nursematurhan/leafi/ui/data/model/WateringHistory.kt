@@ -1,4 +1,4 @@
-package com.nursematurhan.leafi.data.model
+package com.nursematurhan.leafi.ui.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

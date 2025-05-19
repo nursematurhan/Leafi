@@ -26,7 +26,9 @@ fun MyPlantDetailScreen(
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     var showDeleteDialog by remember { mutableStateOf(false) }
-    var showSnackbar by remember { mutableStateOf(false) }
+    var showDeleteSnackbar by remember { mutableStateOf(false) }
+    var showWateredSnackbar by remember { mutableStateOf(false) }
+    var showConfirmEarlyWaterDialog by remember { mutableStateOf(false) }
 
     val daysSinceWatered =
         TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis() - myPlant.lastWateredDate)
@@ -37,11 +39,18 @@ fun MyPlantDetailScreen(
     val nextWateredDate =
         formatter.format(Date(myPlant.lastWateredDate + myPlant.wateringIntervalDays * 86400000L))
 
-    LaunchedEffect(showSnackbar) {
-        if (showSnackbar) {
+    LaunchedEffect(showDeleteSnackbar) {
+        if (showDeleteSnackbar) {
             snackbarHostState.showSnackbar("Plant successfully removed from your list.")
-            showSnackbar = false
+            showDeleteSnackbar = false
             onBack()
+        }
+    }
+
+    LaunchedEffect(showWateredSnackbar) {
+        if (showWateredSnackbar) {
+            snackbarHostState.showSnackbar("Watering date updated!")
+            showWateredSnackbar = false
         }
     }
 
@@ -96,19 +105,55 @@ fun MyPlantDetailScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            if (remainingDays <= 0) {
-                Button(
-                    onClick = onWatered,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Watered")
-                }
-            } else {
-                Text(
-                    text = "You can water this plant in $remainingDays day(s).",
-                    color = Color.Gray
-                )
+            Button(
+                onClick = {
+                    if (remainingDays > 0) {
+                        showConfirmEarlyWaterDialog = true
+                    } else {
+                        onWatered()
+                        showWateredSnackbar = true
+                    }
+                },
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF81C784))
+            ) {
+                Text("Mark as Watered", color = Color.White)
             }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = when {
+                    remainingDays > 0 -> "You can water this plant in $remainingDays day(s)."
+                    remainingDays == 0L -> "You should water this plant today."
+                    else -> "Overdue by ${-remainingDays} day(s)!"
+                },
+                color = if (remainingDays < 0) Color.Red else Color.Gray
+            )
+        }
+
+        if (showConfirmEarlyWaterDialog) {
+            AlertDialog(
+                onDismissRequest = { showConfirmEarlyWaterDialog = false },
+                title = { Text("Are you sure?") },
+                text = { Text("There are still $remainingDays day(s) until the watering day. Do you want to mark it as watered?") },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            onWatered()
+                            showWateredSnackbar = true
+                            showConfirmEarlyWaterDialog = false
+                        }
+                    ) {
+                        Text("Yes", color = Color(0xFF0E8D50))
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { showConfirmEarlyWaterDialog = false }) {
+                        Text("Cancel")
+                    }
+                }
+            )
         }
 
         if (showDeleteDialog) {
@@ -121,7 +166,7 @@ fun MyPlantDetailScreen(
                         onClick = {
                             showDeleteDialog = false
                             onDelete()
-                            showSnackbar = true
+                            showDeleteSnackbar = true
                         }
                     ) {
                         Text("Yes", color = Color.Red)

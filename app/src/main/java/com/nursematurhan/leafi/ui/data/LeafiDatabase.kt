@@ -1,12 +1,13 @@
-package com.nursematurhan.leafi.data
+package com.nursematurhan.leafi.ui.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.nursematurhan.leafi.data.WateringDao
 import com.nursematurhan.leafi.data.model.Plant
-import com.nursematurhan.leafi.data.model.WateringHistory
+import com.nursematurhan.leafi.ui.data.model.WateringHistory
 
 @Database(
     entities = [Plant::class, WateringHistory::class],

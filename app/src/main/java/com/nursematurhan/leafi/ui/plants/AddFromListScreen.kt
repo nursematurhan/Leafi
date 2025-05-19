@@ -5,11 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -22,15 +18,28 @@ import com.nursematurhan.leafi.data.model.Plant
 fun AddFromListScreen(
     plant: Plant,
     onAdd: (wateringInterval: Int, firstWateredDate: Long) -> Unit,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    isLoggedIn: Boolean,
+    onGoToRegister: () -> Unit,
+    onNavigateToMyPlants: () -> Unit
 ) {
     val today = System.currentTimeMillis()
-    val defaultInterval = 3
+    val interval = plant.wateringInterval
+    val snackbarHostState = remember { SnackbarHostState() }
+    var showSnackbar by remember { mutableStateOf(false) }
+
+    LaunchedEffect(showSnackbar) {
+        if (showSnackbar) {
+            snackbarHostState.showSnackbar("Plant successfully added to your list.")
+            showSnackbar = false
+        }
+    }
 
     Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             TopAppBar(
-                title = { Text("Plant Detail") },
+                title = { Text("Plant Details") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
@@ -65,19 +74,32 @@ fun AddFromListScreen(
             Text(text = plant.description)
 
             Spacer(modifier = Modifier.height(24.dp))
-            Text("Watering Interval: $defaultInterval days")
-            Text("First watering will start today.")
+            Text("Watering interval: $interval days")
+            Text("The first watering will be today.")
 
             Spacer(modifier = Modifier.height(24.dp))
-            Button(
-                onClick = {
-                    onAdd(defaultInterval, today)
-                    onBack()
-                },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Add to My Plants")
+
+            if (isLoggedIn) {
+                Button(
+                    onClick = {
+                        onAdd(interval, today)
+                        showSnackbar = true
+                        onNavigateToMyPlants()
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Add to My Plants")
+                }
+            } else {
+                Button(
+                    onClick = onGoToRegister,
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF81C784))
+                ) {
+                    Text("Start building your plant list", color = Color.White)
+                }
             }
         }
     }
 }
+

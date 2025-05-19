@@ -11,6 +11,10 @@ import androidx.navigation.compose.composable
 import com.google.gson.Gson
 import com.nursematurhan.leafi.ui.auth.*
 import com.nursematurhan.leafi.ui.home.HomeScreen
+import com.nursematurhan.leafi.ui.myplants.MyPlant
+import com.nursematurhan.leafi.ui.myplants.MyPlantDetailScreen
+import com.nursematurhan.leafi.ui.myplants.MyPlantsScreen
+import com.nursematurhan.leafi.ui.myplants.MyPlantsViewModel
 import com.nursematurhan.leafi.ui.myplants.*
 import com.nursematurhan.leafi.ui.plants.AddFromListScreen
 import com.nursematurhan.leafi.ui.plants.PlantListScreen
@@ -54,14 +58,23 @@ fun AppNavGraph(
                     plant = plant,
                     onAdd = { interval, date ->
                         plantListViewModel.addToMyPlants(plant, interval, date)
-                        navController.navigate("myplants")
                     },
-                    onBack = { navController.popBackStack() }
+                    onBack = { navController.popBackStack() },
+                    isLoggedIn = isLoggedIn,
+                    onGoToRegister = { navController.navigate("register") },
+                    onNavigateToMyPlants = {
+                        navController.navigate("myplants") {
+                            popUpTo("plants") { inclusive = false }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
                 )
             } else {
                 Text("Plant not found.")
             }
         }
+
 
         composable("myplants") {
             MyPlantsScreen(navController = navController)
@@ -71,7 +84,8 @@ fun AppNavGraph(
             val plantJson = backStackEntry.arguments?.getString("plantJson")
             val decodedJson = Uri.decode(plantJson ?: return@composable)
             val myPlant = Gson().fromJson(decodedJson, MyPlant::class.java)
-            val myPlantsViewModel: MyPlantsViewModel = viewModel()
+
+            val myPlantsViewModel: MyPlantsViewModel = viewModel() // BU ÖNEMLİ!
 
             MyPlantDetailScreen(
                 myPlant = myPlant,
@@ -83,16 +97,15 @@ fun AppNavGraph(
                 onDelete = {
                     myPlantsViewModel.deletePlant(
                         myPlant.plantId,
-                        onSuccess = {
-                            navController.popBackStack()
-                        },
+                        onSuccess = { navController.popBackStack() },
                         onFailure = {
-                            // Hata mesajı gösterilebilir
+
                         }
                     )
                 }
             )
         }
+
 
         composable("profile") {
             ProfileScreen(authViewModel = authViewModel)

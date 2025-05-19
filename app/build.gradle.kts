@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.play.services.location)
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.work.runtime.ktx)
     implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
