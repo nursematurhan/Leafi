@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
@@ -58,7 +59,7 @@ fun MyPlantDetailScreen(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             TopAppBar(
-                title = { Text("Plant Detail") },
+                title = { Text("My Plant Detail") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
@@ -91,7 +92,9 @@ fun MyPlantDetailScreen(
                 contentDescription = myPlant.plantName,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp),
+                    .heightIn(min = 200.dp, max = 300.dp)
+                    .aspectRatio(1.5f)
+                    .clip(MaterialTheme.shapes.medium),
                 contentScale = ContentScale.Crop
             )
 
