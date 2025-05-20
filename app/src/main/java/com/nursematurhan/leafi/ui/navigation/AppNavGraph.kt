@@ -86,7 +86,7 @@ fun AppNavGraph(
             val decodedJson = Uri.decode(plantJson ?: return@composable)
             val myPlant = Gson().fromJson(decodedJson, MyPlant::class.java)
 
-            val myPlantsViewModel: MyPlantsViewModel = viewModel() // BU ÖNEMLİ!
+            val myPlantsViewModel: MyPlantsViewModel = viewModel()
 
             MyPlantDetailScreen(
                 myPlant = myPlant,
